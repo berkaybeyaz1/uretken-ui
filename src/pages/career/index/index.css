@@ -1,0 +1,23 @@
+.ua-card-career {
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.04);
+  margin-bottom: 80px;
+  padding-left: 160px;
+  padding-right: 60px;
+}
+
+.ua-card-career .ua-card__img {
+  width: 160px;
+}
+
+.ua-card-career img {
+  max-height: 105px;
+}
+
+@media (max-width: 991px) {
+  .ua-card {
+    display: block;
+  }
+  .ua-card p {
+    margin-bottom: 16px;
+  }
+}

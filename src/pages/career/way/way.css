@@ -1,0 +1,74 @@
+.career-header {
+  color: #4a4a4a;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  margin-top: 50px;
+}
+
+.way-box {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.07);
+  color: #4a4a4a;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 30px;
+  opacity: 0.7;
+  padding: 25px 25px 17px 25px;
+  position: relative;
+  transition: 0.1s;
+  width: 200px;
+}
+
+.way-box:not(:last-of-type) {
+  margin-right: 30px;
+}
+
+.way-box.active {
+  background-color: var(--blue);
+  color: #fff;
+  opacity: 1;
+}
+
+.way-box:hover {
+  transform: scale(1.05);
+}
+
+.ua-way-box__img {
+  max-height: 75px;
+  text-align: center;
+}
+
+.ua-way-box__img img {
+  max-width: 35%;
+}
+
+.ua-way-box__header {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  margin-top: 20px;
+}
+
+.ua-way-box__span {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 13px;
+}
+
+.ua-way-box__link,
+.ua-way-box__link:hover {
+  color: #4a4a4a;
+}
+
+.ua-way-box__link {
+  display: block;
+  font-size: 12px;
+  text-align: right;
+}
+
+.way-box.active .ua-way-box__link,
+.way-box.active .ua-way-box__link:hover {
+  color: #fff;
+}

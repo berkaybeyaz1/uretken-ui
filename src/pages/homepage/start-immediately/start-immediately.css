@@ -1,0 +1,21 @@
+.start-immediately {
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+  margin-top: 100px;
+  padding-bottom: 74px;
+  padding-top: 90px;
+}
+
+.start-immediately__header {
+  font-size: 34px;
+  font-weight: bold;
+  letter-spacing: -0.9px;
+}
+
+.start-immediately__text {
+  color: var(--gray);
+  font-size: 19px;
+  letter-spacing: -0.9px;
+  margin-bottom: 47px;
+  margin-top: 40px;
+}

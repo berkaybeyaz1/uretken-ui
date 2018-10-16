@@ -1,0 +1,51 @@
+.learn-everything__text {
+  color: var(--dark-blue);
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 100px;
+  margin-top: 195px;
+}
+
+.learn-everything__card-wrap {
+  position: relative;
+}
+
+.learn-everything__card-wrap__card {
+  cursor: default;
+  margin-bottom: 80px;
+  max-width: 300px;
+  transition: 0.3s;
+}
+
+.learn-everything__card-wrap__card:hover
+  .learn-everything__card-wrap__card__img {
+  transform: scale(1.05);
+}
+
+.learn-everything__card-wrap__card__img {
+  height: 180px;
+}
+
+.learn-everything__card-wrap__card h6 {
+  font-size: 32px;
+  letter-spacing: -0.9px;
+  margin-bottom: 20px;
+  margin-top: 42px;
+}
+
+.learn-everything__card-wrap__card p {
+  color: rgba(163, 168, 177, 0.64);
+  font-size: 19px;
+  letter-spacing: -0.9px;
+}
+
+.learn-everything__card-wrap__circle {
+  background-color: #d8d8d8;
+  border-radius: 100%;
+  display: inline-block;
+  height: 10px;
+  position: relative;
+  right: 0;
+  top: 40px;
+  width: 10px;
+}

@@ -1,0 +1,36 @@
+footer {
+  padding-top: 55px;
+}
+
+.footer__logo {
+  margin-bottom: 50px;
+}
+
+.footer__nav {
+  display: inline-block;
+  padding-bottom: 55px;
+}
+
+.footer__nav a {
+  font-size: 14px;
+  line-height: 1.57;
+  color: #4a4a4a;
+}
+
+.footer__nav a:not(:last-of-type) {
+  margin-right: 49px;
+}
+
+@media (max-width: 991px) {
+  .footer__nav {
+    display: block;
+    text-align: center;
+  }
+  .footer__nav a {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .footer__nav a:not(:last-of-type) {
+    margin-right: 0;
+  }
+}
