@@ -97,3 +97,7 @@ main {
   font-weight: 500;
   margin-bottom: 0;
 }
+
+p:last-child {
+  margin-bottom: 0;
+}

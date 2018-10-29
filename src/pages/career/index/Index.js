@@ -18,7 +18,7 @@ export default class Index extends Component {
               <h6 className="ua-card__header">Girişimcilik Yolculuğu</h6>
               <p>Ben, Girişimci olmak istiyorum.</p>
             </div>
-            <Link to="" className="btn">
+            <Link to="/egitim" className="btn">
               Öğrenmeye Devam Et
             </Link>
           </div>
