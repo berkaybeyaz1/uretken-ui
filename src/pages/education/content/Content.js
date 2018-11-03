@@ -11,7 +11,6 @@ const Svg = () => {
     >
       <path
         fill="#212924"
-        fill-rule="nonzero"
         d="M20.181 1.288C19.423.373 18.024 0 15.351 0H5.65C2.915 0 1.49.397.736 1.37 0 2.32 0 3.72 0 5.656v3.69C0 13.095.874 15 5.649 15h9.702c2.318 0 3.602-.33 4.433-1.136.852-.828 1.216-2.18 1.216-4.519v-3.69c0-2.042-.057-3.449-.819-4.367zm-6.699 6.721l-4.406 2.338a.669.669 0 0 1-.664-.022.69.69 0 0 1-.327-.588V5.078a.69.69 0 0 1 .326-.588.669.669 0 0 1 .664-.022L13.48 6.79a.689.689 0 0 1 .365.61c0 .256-.14.49-.364.61z"
       />
     </svg>
@@ -25,6 +24,10 @@ export default class Content extends Component {
         <div className="container">
           <div className="row">
             <div className="col-12">
+              <h1>Ders: {this.props.ders}</h1>
+              <h1>Konu: {this.props.konu}</h1>
+            </div>
+            <div className="col-12">
               <div className="education">
                 <div className="education__head">
                   <ul className="education__head__ul">
@@ -37,7 +40,6 @@ export default class Content extends Component {
                       >
                         <path
                           fill="#3F60E8"
-                          fill-rule="nonzero"
                           d="M3.528 8.929l6.687-6.678a.967.967 0 0 0 .285-.69.968.968 0 0 0-.285-.69L9.629.284A.97.97 0 0 0 8.937 0a.97.97 0 0 0-.69.285L.284 8.236A.968.968 0 0 0 0 8.928c0 .263.1.51.285.694l7.954 7.943a.97.97 0 0 0 .691.285.97.97 0 0 0 .691-.285l.586-.585c.381-.38.381-1 0-1.381l-6.679-6.67z"
                         />
                       </svg>
@@ -68,7 +70,6 @@ export default class Content extends Component {
                       >
                         <path
                           fill="#3F60E8"
-                          fill-rule="nonzero"
                           d="M7.472 8.929L.785 2.25A.967.967 0 0 1 .5 1.56c0-.262.101-.507.285-.69l.586-.586A.97.97 0 0 1 2.063 0a.97.97 0 0 1 .69.285l7.962 7.951c.185.184.286.43.285.692 0 .263-.1.51-.285.694L2.76 17.565a.97.97 0 0 1-.691.285.97.97 0 0 1-.691-.285l-.586-.585a.977.977 0 0 1 0-1.381l6.679-6.67z"
                         />
                       </svg>

@@ -10,6 +10,7 @@ import Header from "./pages/header/Header";
 import HomePage from "./pages/HomePage";
 import Career from "./pages/Career";
 import Education from "./pages/Education";
+import Login from "./pages/login/Login";
 
 import Footer from "./pages/footer/Footer";
 
@@ -23,7 +24,8 @@ export default class App extends Component {
             <ScrollTop>
               <Route path="/" component={HomePage} exact />
               <Route path="/kariyer" component={Career} />
-              <Route path="/egitim" component={Education} />
+              <Route path="/egitim/:ders/konu/:konu" component={Education} />
+              <Route path="/giris-yap" component={Login} />
             </ScrollTop>
           </main>
           <Footer />
