@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
+import { observer, inject } from "mobx-react";
+import Store from '../../../stores';
 
 import "./../index/index.css";
 
@@ -13,7 +15,23 @@ import Detail4 from "./../../../img/detail-4.png";
 import Detail5 from "./../../../img/detail-5.png";
 import Detail6 from "./../../../img/detail-6.png";
 
-export default class Index extends Component {
+
+class Index extends Component {
+  constructor(props) {
+    super()
+
+    this.state = {
+      roadMaps: [],
+    }
+  }
+  componentWillMount() {
+    Store.Services.whereShouldIStart().then((response) => {
+      this.setState({
+        roadMaps: response.data,
+      })
+    })
+  }
+
   render() {
     return (
       <Fragment>
@@ -58,24 +76,17 @@ export default class Index extends Component {
                 </div>
               </div>
               <div className="col-12 col-lg-6">
-                <Link to="kariyer" className="ua-card ua-card-index">
-                  <div className="ua-card__img">
-                    <img src={Card1} alt="" />
-                  </div>
-                  <p>Ben, Girişimci olmak istiyorum.</p>
-                </Link>
-                <Link to="kariyer" className="ua-card ua-card-index">
-                  <div className="ua-card__img">
-                    <img src={Card2} alt="" />
-                  </div>
-                  <p>Ben, Tasarımcı olmak istiyorum.</p>
-                </Link>
-                <Link to="kariyer" className="ua-card ua-card-index">
-                  <div className="ua-card__img">
-                    <img src={Card3} alt="" />
-                  </div>
-                  <p>Ben, Yazılımcı olmak istiyorum.</p>
-                </Link>
+              {this.state.roadMaps.map((value, index) => {
+                return (
+                  <Link to={"kariyer/" + value.slug} className="ua-card ua-card-index">
+                    <div className="ua-card__img">
+                      <img src={Card1} alt="" />
+                    </div>
+                    <p>{value.name}</p>
+                  </Link>
+                )
+              })}
+                
                 <p className="index__more text-right">
                   <a href="#">
                     <span>Daha Fazla Göster</span>
@@ -101,3 +112,4 @@ export default class Index extends Component {
     );
   }
 }
+export default Index

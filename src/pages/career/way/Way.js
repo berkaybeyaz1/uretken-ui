@@ -1,68 +1,40 @@
 import React, { Component, Fragment } from "react";
 
 import "./../way/way.css";
+import Slider from "react-slick";
 
 import Card1 from "./../../../img/card-1.png";
 
 export default class Way extends Component {
   render() {
+    var settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 5,
+      className: 'row',
+      slidesToScroll: 5,
+    };
     return (
       <Fragment>
         <section className="way">
           <div className="container">
-            <h6 className="career-header">Girişimcinin Yolu</h6>
-            <div className="row">
-              <div className="way-box active">
-                <div className="ua-way-box__img">
-                  <img src={Card1} alt="" />
+            <h6 className="career-header">{this.props.data.name}</h6>
+            <Slider {...settings}>
+            {this.props.data.lectures.map((value, i) => {
+              return(
+                <div className="way-box">
+                  <div className="ua-way-box__img">
+                    <img src={Card1} alt="" />
+                  </div>
+                  <h6 className="ua-way-box__header">{value.lecture_name}</h6>
+                  <a href="" className="ua-way-box__link">
+                    Detaylı Bilgi
+                  </a>
                 </div>
-                <h6 className="ua-way-box__header">Girişimcilik</h6>
-                <span className="ua-way-box__span">101</span>
-                <a href="" className="ua-way-box__link">
-                  Detaylı Bilgi
-                </a>
-              </div>
-              <div className="way-box">
-                <div className="ua-way-box__img">
-                  <img src={Card1} alt="" />
-                </div>
-                <h6 className="ua-way-box__header">Girişimcilik</h6>
-                <span className="ua-way-box__span">101</span>
-                <a href="" className="ua-way-box__link">
-                  Detaylı Bilgi
-                </a>
-              </div>
-              <div className="way-box">
-                <div className="ua-way-box__img">
-                  <img src={Card1} alt="" />
-                </div>
-                <h6 className="ua-way-box__header">Girişimcilik</h6>
-                <span className="ua-way-box__span">101</span>
-                <a href="" className="ua-way-box__link">
-                  Detaylı Bilgi
-                </a>
-              </div>
-              <div className="way-box">
-                <div className="ua-way-box__img">
-                  <img src={Card1} alt="" />
-                </div>
-                <h6 className="ua-way-box__header">Girişimcilik</h6>
-                <span className="ua-way-box__span">101</span>
-                <a href="" className="ua-way-box__link">
-                  Detaylı Bilgi
-                </a>
-              </div>
-              <div className="way-box">
-                <div className="ua-way-box__img">
-                  <img src={Card1} alt="" />
-                </div>
-                <h6 className="ua-way-box__header">Girişimcilik</h6>
-                <span className="ua-way-box__span">101</span>
-                <a href="" className="ua-way-box__link">
-                  Detaylı Bilgi
-                </a>
-              </div>
-            </div>
+              )
+            })}
+            </Slider>
           </div>
         </section>
       </Fragment>

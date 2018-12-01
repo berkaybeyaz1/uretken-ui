@@ -7,6 +7,7 @@ import Card1 from "./../../../img/card-1.png";
 
 export default class Index extends Component {
   render() {
+    const {road_map} = this.props;
     return (
       <Fragment>
         <div className="container">
@@ -15,7 +16,7 @@ export default class Index extends Component {
               <img src={Card1} alt="" />
             </div>
             <div>
-              <h6 className="ua-card__header">Girişimcilik Yolculuğu</h6>
+              <h6 className="ua-card__header">{road_map.name}</h6>
               <p>Ben, Girişimci olmak istiyorum.</p>
             </div>
             <Link to="/egitim/matematik/konu/konu5" className="btn">

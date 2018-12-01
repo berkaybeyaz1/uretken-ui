@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { slide as Menu } from "react-burger-menu";
 
 import "./../header/header.css";
-
+import Store from '../../stores';
 import Logo from "./../../img/logo.png";
 import LogoSmall from "./../../img/logo-small.png";
+import { observer } from "mobx-react";
 
-export default class Header extends Component {
+@observer
+class Header extends Component {
   render() {
     return (
       <Fragment>
@@ -21,7 +23,7 @@ export default class Header extends Component {
                 <Link to="/">Ana Sayfa</Link>
                 <Link to="/topluluk">Topluluğa Katıl</Link>
                 <Link to="/kaynaklar">Kaynaklar</Link>
-                <Link to="/giris-yap">Giriş Yap</Link>
+                {Store.Account.authorized === true ? <a onClick={() => {Store.Account.authorized = false; window.location.reload()}} style={{color: 'white'}}>Cikis Yap</a> : <Link to="/giris-yap">Giriş Yap</Link>}
                 <Link to="partner">Partner Olun</Link>
               </nav>
             </div>
@@ -43,3 +45,4 @@ export default class Header extends Component {
     );
   }
 }
+export default Header

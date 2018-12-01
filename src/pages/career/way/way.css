@@ -1,3 +1,6 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
 .career-header {
   color: #4a4a4a;
   font-size: 18px;
@@ -18,7 +21,16 @@
   padding: 25px 25px 17px 25px;
   position: relative;
   transition: 0.1s;
-  width: 200px;
+  width: 200px !important;
+  height: 240px !important;
+}
+
+/** Slick Slide Config **/
+.slick-slide {
+  margin-left: 1px;
+}
+.slick-list {
+  height: 250px !important;
 }
 
 .way-box:not(:last-of-type) {
@@ -63,7 +75,9 @@
 }
 
 .ua-way-box__link {
-  display: block;
+  position: absolute;
+  right: 11px;
+  bottom: 11px;
   font-size: 12px;
   text-align: right;
 }
