@@ -9,20 +9,22 @@ export default class Index extends Component {
   render() {
     return (
       <Fragment>
-        <div className="container">
-          <div className="ua-card ua-card-career">
-            <div className="ua-card__img">
-              <img src={Card1} alt="" />
+        <section className="career">
+          <div className="container">
+            <div className="ua-card ua-card-career">
+              <div className="ua-card__img">
+                <img src={Card1} alt="" />
+              </div>
+              <div>
+                <h6 className="ua-card__header">Girişimcilik Yolculuğu</h6>
+                <p>Ben, Girişimci olmak istiyorum.</p>
+              </div>
+              <Link to="/egitim/matematik/konu/konu5" className="btn">
+                Öğrenmeye Devam Et
+              </Link>
             </div>
-            <div>
-              <h6 className="ua-card__header">Girişimcilik Yolculuğu</h6>
-              <p>Ben, Girişimci olmak istiyorum.</p>
-            </div>
-            <Link to="/egitim/matematik/konu/konu5" className="btn">
-              Öğrenmeye Devam Et
-            </Link>
           </div>
-        </div>
+        </section>
       </Fragment>
     );
   }

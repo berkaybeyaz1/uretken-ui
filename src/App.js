@@ -24,7 +24,10 @@ export default class App extends Component {
             <ScrollTop>
               <Route path="/" component={HomePage} exact />
               <Route path="/kariyer" component={Career} />
-              <Route path="/egitim/:ders/konu/:konu" component={Education} />
+              <Route
+                path="/egitim/:lesson/konu/:subject"
+                component={Education}
+              />
               <Route path="/giris-yap" component={Login} />
             </ScrollTop>
           </main>

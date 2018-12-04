@@ -12,7 +12,7 @@ export default class Practical extends Component {
           <div className="container">
             <h6 className="career-header">Yapılan Pratikler</h6>
             <div className="row">
-              <div className="practical-box">
+              <div className="practical-box is-done">
                 <div className="ua-practical-box__img">
                   <img src={Card1} alt="" />
                 </div>
@@ -20,7 +20,7 @@ export default class Practical extends Component {
                   İş Modeli Oluştur
                 </h6>
               </div>
-              <div className="practical-box">
+              <div className="practical-box is-done">
                 <div className="ua-practical-box__img">
                   <img src={Card1} alt="" />
                 </div>

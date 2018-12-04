@@ -30,7 +30,7 @@ export default class Login extends Component {
                       <input type="text" placeholder="Bölüm" />
                     </div>
                     <div className="col-12 col-lg-6">
-                      <input type="text" placeholder="Doğum Tarihi" />
+                      <input type="date" placeholder="Doğum Tarihi" />
                     </div>
                     <div className="col-12 col-lg-6">
                       <input type="text" placeholder="İlgi Alanı" />

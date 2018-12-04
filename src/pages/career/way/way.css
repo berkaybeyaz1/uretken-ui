@@ -44,6 +44,13 @@
   max-width: 35%;
 }
 
+.ua-way-box__number {
+  font-weight: bold;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
 .ua-way-box__header {
   font-size: 20px;
   font-weight: bold;

@@ -4,10 +4,10 @@ import Content from "./education/content/Content";
 
 export default class Education extends Component {
   render() {
-    const { ders, konu } = this.props.match.params;
+    const { lesson, subject } = this.props.match.params;
     return (
       <Fragment>
-        <Content ders={ders} konu={konu} />
+        <Content lesson={lesson} subject={subject} />
       </Fragment>
     );
   }

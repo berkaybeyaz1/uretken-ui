@@ -30,26 +30,63 @@
 }
 
 body {
-  background-color: #fafbfb;
+  background: #fafbfb none no-repeat top right;
   font-family: "InterUI";
+}
+
+@media (min-width: 992px) {
+  body {
+    background-image: url("./img/bg.png");
+  }
 }
 
 main {
   margin-top: 30px;
 }
 
+label {
+  margin-bottom: 0;
+}
+
 .btn {
   background-color: var(--blue);
-  border: none;
+  border: 2px solid transparent;
   color: #fff;
   font-size: 16px;
   line-height: 1.38;
-  padding: 18px 46px;
+  padding: 17px 46px;
 }
 
 .btn:hover {
   background-color: var(--dark-blue);
   color: #fff;
+}
+
+.btn--small {
+  padding: 11px 54px;
+}
+
+.btn--ghost {
+  background-color: transparent;
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.btn--ghost:hover {
+  border-color: var(--dark-blue);
+}
+
+.btn:not(:last-child) {
+  margin-right: 25px;
+}
+
+.progress {
+  background-color: #d8d8d8;
+  height: 10px;
+}
+
+.progress-bar {
+  background-color: var(--blue);
 }
 
 .ua-card {

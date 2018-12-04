@@ -10,6 +10,19 @@
   width: 200px;
 }
 
+.practical-box.is-done:before {
+  background: url(./../../../img/tik.png) no-repeat;
+  background-size: 28px 28px;
+  content: "";
+  display: block;
+  height: 28px;
+  position: absolute;
+  right: -14px;
+  top: -14px;
+  width: 28px;
+  z-index: 2;
+}
+
 .practical-box:not(:last-of-type) {
   margin-right: 30px;
 }
