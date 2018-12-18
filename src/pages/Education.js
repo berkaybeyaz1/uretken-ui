@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from "react";
 
 import Content from "./education/content/Content";
+import { observer } from "mobx-react";
 
-export default class Education extends Component {
+@observer
+class Education extends Component {
   render() {
     const { ders, konu } = this.props.match.params;
     return (
@@ -12,3 +14,4 @@ export default class Education extends Component {
     );
   }
 }
+export default Education

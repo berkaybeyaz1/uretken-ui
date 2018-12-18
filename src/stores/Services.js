@@ -2,6 +2,7 @@
 import { observable, action } from 'mobx';
 import { persist } from 'mobx-persist';
 import Account from './Account';
+import { observer } from 'mobx-react';
 
 const URL = "http://uretkenakdemi-env.msutivn332.eu-central-1.elasticbeanstalk.com/api/";
 
@@ -27,7 +28,7 @@ class Store {
         this.alertMessage = message;
     }
     
-    getRoadMapList = () => {
+    @action getRoadMapList = () => {
         return new Promise((resolve,reject) => {
             fetch(URL + 'road-map-lists', {
                 method: 'GET'
@@ -43,7 +44,7 @@ class Store {
             })
         })
     }
-    whereShouldIStart = () => {
+    @action whereShouldIStart = () => {
         return new Promise((resolve,reject) => {
             fetch(URL + 'where-should-i-start', {
                 method: 'GET'
@@ -60,12 +61,7 @@ class Store {
         })
     }
 
-    getLectureList = (slug) => {
-        console.table({
-            headers: {
-                'Authorization': 'Bearer '+ String(Account.token)
-            }
-        })
+    @action getLectureList = (slug) => {
         return new Promise((resolve,reject) => {
             fetch(URL + 'dashboard/package/'+ slug+ '/list', {
                 method: 'GET',

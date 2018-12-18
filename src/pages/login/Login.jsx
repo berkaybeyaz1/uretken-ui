@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 
 import Store from '../../stores';
 import "./../login/login.css";
+import { observer } from "mobx-react";
 
-export default class Login extends Component {
+@observer
+class Login extends Component {
 
   constructor(props) {
     super();
@@ -17,8 +19,9 @@ export default class Login extends Component {
     };
   }
 
-  componentWillMount() {
-    if(Store.Account.authorized) {
+  componentDidMount() {
+    console.log(Store.Account.authorized === true, JSON.parse(JSON.stringify(window.localStorage.getItem('Account'))).authorized === true, Store.Account.authorized)
+    if(Store.Account.authorized === true && JSON.parse(JSON.stringify(window.localStorage.getItem('Account'))).authorized === true) {
       this.props.history.push('/')
     }
   }
@@ -56,12 +59,15 @@ export default class Login extends Component {
               return response.data.errors[value][0];
             });
             Store.Services.createAlert(true, 'error', 'Hata!', errorTexts.join('\n'));
+          } else if(response.data.success === false) {
+            Store.Services.createAlert(true, 'error', 'Hata!', 'Email ve sifre uyusmuyor');
           } else {
             Store.Services.createAlert(true, 'success', 'Başarılı', 'Basariyla giris yaptiniz');
             setTimeout(() => {
               Store.Services.alertHide();
               this.props.history.push('/kariyer-sec')
             }, 1000)
+            console.log(response);
             Store.Account.setUser(response.data.token);
             Store.Account.authorized = true;
           }
@@ -149,3 +155,4 @@ export default class Login extends Component {
     );
   }
 }
+export default Login

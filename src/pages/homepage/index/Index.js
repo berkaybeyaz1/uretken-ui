@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
-import { observer, inject } from "mobx-react";
+import { Link, withRouter } from "react-router-dom";
+import { observer, inject} from "mobx-react";
 import Store from '../../../stores';
 
 import "./../index/index.css";
@@ -15,7 +15,9 @@ import Detail4 from "./../../../img/detail-4.png";
 import Detail5 from "./../../../img/detail-5.png";
 import Detail6 from "./../../../img/detail-6.png";
 
-
+@withRouter
+@inject('Services', 'Account')
+@observer
 class Index extends Component {
   constructor(props) {
     super()
@@ -25,6 +27,7 @@ class Index extends Component {
     }
   }
   componentWillMount() {
+    console.log(this.props);
     Store.Services.whereShouldIStart().then((response) => {
       this.setState({
         roadMaps: response.data,

@@ -5392,6 +5392,10 @@ mobx-persist@^0.4.1:
   dependencies:
     serializr "^1.1.11"
 
+mobx-react-router@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/mobx-react-router/-/mobx-react-router-4.0.5.tgz#5f270eebceb64c256bc2f3c6bde8c5d88e76819e"
+
 mobx-react@^5.3.6:
   version "5.3.6"
   resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-5.3.6.tgz#0bead0173aed7d12ace4981b53c28db4d61de9ef"

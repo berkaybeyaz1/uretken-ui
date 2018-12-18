@@ -10,6 +10,9 @@ import { observer } from "mobx-react";
 
 @observer
 class Header extends Component {
+  constructor(props) {
+    super()
+  }
   render() {
     return (
       <Fragment>
@@ -23,7 +26,9 @@ class Header extends Component {
                 <Link to="/">Ana Sayfa</Link>
                 <Link to="/topluluk">Topluluğa Katıl</Link>
                 <Link to="/kaynaklar">Kaynaklar</Link>
-                {Store.Account.authorized === true ? <a onClick={() => {Store.Account.authorized = false; window.location.reload()}} style={{color: 'white'}}>Cikis Yap</a> : <Link to="/giris-yap">Giriş Yap</Link>}
+                {Store.Account.authorized === true ?
+                <Link to="/cikis-yap">Cikis Yap</Link> : 
+                <Link to="/giris-yap">Giriş Yap</Link>}
                 <Link to="partner">Partner Olun</Link>
               </nav>
             </div>

@@ -8,8 +8,10 @@ import Card1 from "./../img/card-1.png";
 import Index from "./career/index/Index";
 import Way from "./career/way/Way";
 import Practical from "./career/practical/Practical";
+import { observer } from "mobx-react";
 
-export default class HomePage extends Component {
+@observer
+class HomePage extends Component {
     constructor(props) {
         super()
 
@@ -52,3 +54,4 @@ export default class HomePage extends Component {
     );
   }
 }
+export default HomePage

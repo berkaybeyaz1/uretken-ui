@@ -20,6 +20,7 @@ class Career extends Component {
   componentWillMount() {
     const slug = this.props.match.params.kariyer
     Services.getLectureList(slug).then((response) => {
+      console.log(response, slug);
       this.setState({
         loading: true,
         road_map: response,
