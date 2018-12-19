@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { HashRouter, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Router, Redirect } from "react-router-dom";
 import Simplert from 'react-simplert'
 import createBrowserHistory from 'history/createBrowserHistory';
 import { Provider, observer } from 'mobx-react';
@@ -34,9 +34,8 @@ const history = syncHistoryWithStore(browserHistory, routingStore);
 
 @observer
 class App extends Component {
-
-  renderLogout() {
-    if(Account.authorized === true && String(Account.token).length > 3 || JSON.parse(window.localStorage.getItem('Account')).authorized) {
+  renderLogout = () => {
+    if((Account.authorized === true && String(Account.token).length > 3) || JSON.parse(window.localStorage.getItem('Account')).authorized) {
       Account.logout().then(() => {
         this.props.history.push('/giris-yap');
       })
@@ -47,23 +46,19 @@ class App extends Component {
       <div></div>
     )
   }
-
   render() {
     const PrivateRoute = ({ component: Component, ...rest }) => {
       return (
         <Route {...rest} render={(props) => (
-          Account.hasOwnProperty('authorized') ? 
-          Account.authorized === true && 
-          String(Account.token).length > 3 || 
-          JSON.parse(window.localStorage.getItem('Account')).authorized
+          Account.authorized === true && String(Account.token).length > 3 || JSON.parse(window.localStorage.getItem('Account')).authorized
             ? <Component {...props} />
-            : <Redirect to='/giris-yap' /> : <Redirect to='/giris-yap' />
+            : <Redirect to='/giris-yap' />
         )} />
       )
     }
     return (
       <Provider {...stores}>
-      <HashRouter history={history}>
+      <BrowserRouter history={history}>
         <Fragment>
           <Header />
           <Simplert 
@@ -84,7 +79,7 @@ class App extends Component {
           </main>
           <Footer />
         </Fragment>
-      </HashRouter>
+      </BrowserRouter>
       </Provider>
     );
   }

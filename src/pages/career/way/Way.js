@@ -22,13 +22,14 @@ export default class Way extends Component {
             <h6 className="career-header">{this.props.data.name}</h6>
             <Slider {...settings}>
             {this.props.data.lectures.map((value, i) => {
+              console.log(value);
               return(
                 <div className="way-box">
                   <div className="ua-way-box__img">
                     <img src={Card1} alt="" />
                   </div>
                   <h6 className="ua-way-box__header">{value.lecture_name}</h6>
-                  <a href="" className="ua-way-box__link">
+                  <a href={`/egitim/${this.props.data.slug}/konu/${value.slug}`} className="ua-way-box__link">
                     Detaylı Bilgi
                   </a>
                 </div>

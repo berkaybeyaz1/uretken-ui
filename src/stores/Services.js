@@ -81,6 +81,27 @@ class Store {
             })
         })
     }
+
+    @action getLecture = (course, lecture) => {
+        return new Promise((resolve,reject) => {
+            fetch(URL + 'course/'+ course +'/lecture/'+ lecture, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer '+ String(Account.token),
+                    'content-type': 'application/json; charset=utf-8',
+                },
+            })
+            .then((response) => {
+                resolve(response.json())
+            })
+            .then((responseJSON) => {
+                resolve(responseJSON)
+            })
+            .catch((err) => {
+                reject(err);
+            })
+        })
+    }
 }
 
 export default new Store();

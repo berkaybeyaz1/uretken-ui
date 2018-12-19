@@ -20,6 +20,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    console.log(Store);
     console.log(Store.Account.authorized === true, JSON.parse(JSON.stringify(window.localStorage.getItem('Account'))).authorized === true, Store.Account.authorized)
     if(Store.Account.authorized === true && JSON.parse(JSON.stringify(window.localStorage.getItem('Account'))).authorized === true) {
       this.props.history.push('/')

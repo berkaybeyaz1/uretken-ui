@@ -33,7 +33,7 @@ class Career extends Component {
       <Fragment>
       {this.state.loading ? 
         <>
-        <Index road_map={this.state.road_map[0]}/>
+        <Index road_map={this.state.road_map[0]} link={"/egitim/"+ this.props.match.params.kariyer + "/konu/tanitim"}/>
         {this.state.road_map.map((value) => {
           return(
             <Way data={value}/>

@@ -16,22 +16,108 @@ const Svg = () => {
     </svg>
   );
 };
+const TextSvg = () => {
+  return (
+    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+    width="21px"
+      height="15px"
+      viewBox="0 0 470.586 470.586">
+ <g>
+   <path fill="#212924" d="M327.081,0H90.234C74.331,0,61.381,12.959,61.381,28.859v412.863c0,15.924,12.95,28.863,28.853,28.863H380.35
+     c15.917,0,28.855-12.939,28.855-28.863V89.234L327.081,0z M333.891,43.184l35.996,39.121h-35.996V43.184z M384.972,441.723
+     c0,2.542-2.081,4.629-4.635,4.629H90.234c-2.55,0-4.619-2.087-4.619-4.629V28.859c0-2.548,2.069-4.613,4.619-4.613h219.411v70.181
+     c0,6.682,5.443,12.099,12.129,12.099h63.198V441.723z M128.364,128.89H334.15c5.013,0,9.079,4.066,9.079,9.079
+     c0,5.013-4.066,9.079-9.079,9.079H128.364c-5.012,0-9.079-4.066-9.079-9.079C119.285,132.957,123.352,128.89,128.364,128.89z
+      M343.229,198.98c0,5.012-4.066,9.079-9.079,9.079H128.364c-5.012,0-9.079-4.066-9.079-9.079s4.067-9.079,9.079-9.079H334.15
+     C339.163,189.901,343.229,193.968,343.229,198.98z M343.229,257.993c0,5.013-4.066,9.079-9.079,9.079H128.364
+     c-5.012,0-9.079-4.066-9.079-9.079s4.067-9.079,9.079-9.079H334.15C339.163,248.914,343.229,252.98,343.229,257.993z
+      M343.229,318.011c0,5.013-4.066,9.079-9.079,9.079H128.364c-5.012,0-9.079-4.066-9.079-9.079s4.067-9.079,9.079-9.079H334.15
+     C339.163,308.932,343.229,312.998,343.229,318.011z"/>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ <g>
+ </g>
+ </svg>
+  )
+}
 
 export default class Content extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      selectedPane: 0,
+      selectedLecture: props.lecture[0]
+    }
+  }
+  changePane = (id) => {
+    this.setState({
+      selectedPane: id,
+      selectedLecture: this.props.lecture[id]
+    })
+  }
+  nextPage = () => {
+    const getLectureList = this.props.lecture.length - 1
+    const currentPane = this.state.selectedPane
+    console.log(getLectureList, currentPane)
+    if(currentPane > getLectureList || currentPane === getLectureList) {
+      return;
+    } else {
+      this.setState({
+        selectedPane: currentPane + 1,
+        selectedLecture: this.props.lecture[currentPane + 1]
+      })
+    }
+  }
+  prevPane = () => {
+    const getLectureList = this.props.lecture.length - 1
+    const currentPane = this.state.selectedPane
+    if(currentPane === 0 || currentPane <= 0) {
+      return;
+    } else {
+      this.setState({
+        selectedPane: currentPane - 1,
+        selectedLecture: this.props.lecture[currentPane - 1]
+      })
+    }
+    
+  }
   render() {
     return (
       <Fragment>
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <h1>Ders: {this.props.ders}</h1>
-              <h1>Konu: {this.props.konu}</h1>
-            </div>
-            <div className="col-12">
               <div className="education">
                 <div className="education__head">
                   <ul className="education__head__ul">
-                    <li>
+                    <li onClick={this.prevPane}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="11"
@@ -45,22 +131,14 @@ export default class Content extends Component {
                       </svg>
                       <span className="education__head__prev-next">Geri</span>
                     </li>
-                    <li>
-                      <Svg />
-                    </li>
-                    <li>
-                      <Svg />
-                    </li>
-                    <li>
-                      <Svg />
-                    </li>
-                    <li className="active">
-                      <Svg />
-                    </li>
-                    <li>
-                      <Svg />
-                    </li>
-                    <li>
+                    {this.props.lecture.map((value, index) => {
+                      if(value.type === "text") {
+                        return <li className={this.state.selectedPane === index ? "active": null} onClick={() => this.changePane(index)}><TextSvg /></li>
+                      } else {
+                        return <li className={this.state.selectedPane === index ? "active": null} onClick={() => this.changePane(index)}><Svg /></li>
+                      }
+                    })}
+                    <li onClick={this.nextPage}>
                       <span className="education__head__prev-next">İleri</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -77,44 +155,10 @@ export default class Content extends Component {
                   </ul>
                 </div>
                 <div className="education__content">
-                  <h5 className="education__header">Fikir Nasıl Bulunur?</h5>
                   <span className="education__fav">Favorilere ekle</span>
-                  <p>
-                    Girişimcilik sürecine başlarken bir ürünle, projeyle yola
-                    çıkacağız. Bu proje tam anlamıyla inandığınız, kendinizi ait
-                    hissettiğiniz, geceleri uykularınızı kaçıracak türden bir
-                    şey. Projeye gerçekten inancınız olmazsa aksiliklerle
-                    karşılaştığınızda pes etmeniz şaşılmayacak bir durum olur.
-                    Farklı bir bakış açısından bakarsak da bu tür cümleleri çok
-                    sık duyarız. “Kod yazıcam, yazabiliyorum ancak ne yazacağımı
-                    bilmiyorum. Aklımda fikir yok” Bu cümleleri kuran kişiler
-                    girişimci olmak isteyip, teknik beceriye de sahip olup ilk
-                    adımı atmada sıkıntı yaşayanlardır. Peki girişimciliğe
-                    başlayacağız ama fikir nereden ve nasıl bulacağız?
-                  </p>
-                  <h6 className="education__sub-header">Kendi sorununu çöz:</h6>
-                  <p>
-                    Girişimcilik sorun çözmektir. Sorunu iyi tanıyıp ona uygun
-                    çözümü üretmektir. En iyi kendi sorununuzu tanımlayabilir ve
-                    ona uygun çözümü geliştirebilirsiniz. Örnek olarak Scode’da
-                    bizim yaptığımız buydu. Yazılım öğrenmeye başladığımızdaki
-                    önyargı bizi yavaşlatmıştı ve bunu nasıl çözeriz sorusu
-                    Scode’u yarattı. Scode’u bizzat kendimiz test ederek
-                    gelişimini sağladık. Tabi yalnızca kendinizde test etmek
-                    hatadır.
-                  </p>
-
-                  <h6 className="education__sub-header">
-                    Globaldeki projeleri Local’e, Türkiye’ye odaklamak:
-                  </h6>
-                  <p>
-                    Girişimleri pazarlarına göre 2'ye ayırabiliriz. Local ve
-                    Global. Büyük şirketler local pazardan daha çok global
-                    pazara hitap eder. Çünkü local pazarlara hitap etmeleri için
-                    fazladan organizasyon gücü kurmaları gerekir ve bunu bir
-                    ihtiyaç olarak görmezler. Bu da diğer girişimciler için bir
-                    fırsattır.
-                  </p>
+                  {this.state.selectedLecture.type === "text" ? 
+                    <div dangerouslySetInnerHTML={{__html: this.state.selectedLecture.data}}></div>
+                  : <div class="youtube-embed"><iframe allowFullScreen="allowFullScreen" src={`https://www.youtube.com/embed/${this.state.selectedLecture.data}?ecver=1&amp;iv_load_policy=1&amp;yt:stretch=16:9&amp;autohide=1&amp;color=red&amp;width=560&amp;width=560`} width="560" height="315" allowtransparency="true" frameborder="0"></iframe></div>}
                 </div>
               </div>
             </div>
