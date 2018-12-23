@@ -6,7 +6,11 @@ export default class StartImmediately extends Component {
   render() {
     return (
       <Fragment>
-        <section className="start-immediately">
+        <section
+          className="start-immediately wow fadeIn"
+          data-wow-duration="1s"
+          data-wow-delay="0.75s"
+        >
           <div className="container text-center">
             <h5 className="start-immediately__header">
               Bugün, hemen başla ve hayallerini gerçekleştir.

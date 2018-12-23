@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { observer, inject} from "mobx-react";
-import Store from '../../../stores';
+import { observer, inject } from "mobx-react";
+import Store from "../../../stores";
 
 import "./../index/index.css";
 
@@ -16,23 +16,23 @@ import Detail5 from "./../../../img/detail-5.png";
 import Detail6 from "./../../../img/detail-6.png";
 
 @withRouter
-@inject('Services', 'Account')
+@inject("Services", "Account")
 @observer
 class Index extends Component {
   constructor(props) {
-    super()
+    super();
 
     this.state = {
-      roadMaps: [],
-    }
+      roadMaps: []
+    };
   }
   componentWillMount() {
     console.log(this.props);
-    Store.Services.whereShouldIStart().then((response) => {
+    Store.Services.whereShouldIStart().then(response => {
       this.setState({
-        roadMaps: response.data,
-      })
-    })
+        roadMaps: response.data
+      });
+    });
   }
 
   render() {
@@ -41,7 +41,10 @@ class Index extends Component {
         <section className="index">
           <div className="container">
             <div className="row">
-              <div className="col-12 col-lg-6 text-center text-lg-left">
+              <div
+                className="col-12 col-lg-6 text-center text-lg-left wow fadeIn"
+                data-wow-duration="1s"
+              >
                 <p className="index__header">
                   Nereden başlayacağını bilmiyor musun?
                 </p>
@@ -50,7 +53,12 @@ class Index extends Component {
                   gerektiğini öğren.
                 </p>
                 <p>
-                  <a href="#" className="btn index__btn">
+                  <a
+                    href="#"
+                    className="btn index__btn wow fadeIn"
+                    data-wow-duration="1s"
+                    data-wow-delay="0.5s"
+                  >
                     <span>Ücretsiz Kayıt Ol</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -65,11 +73,20 @@ class Index extends Component {
                       />
                     </svg>
                   </a>
-                  <a href="#" className="index__info d-block d-lg-inline-block">
+                  <a
+                    href="#"
+                    className="index__info d-block d-lg-inline-block wow fadeIn"
+                    data-wow-duration="1s"
+                    data-wow-delay="0.5s"
+                  >
                     Detaylı Bilgi
                   </a>
                 </p>
-                <div className="index__details">
+                <div
+                  className="index__details wow fadeIn"
+                  data-wow-duration="1s"
+                  data-wow-delay="1s"
+                >
                   <img src={Detail1} alt="detay 1" />
                   <img src={Detail2} alt="detay 2" />
                   <img src={Detail3} alt="detay 3" />
@@ -78,18 +95,25 @@ class Index extends Component {
                   <img src={Detail6} alt="detay 6" />
                 </div>
               </div>
-              <div className="col-12 col-lg-6">
-              {this.state.roadMaps.map((value, index) => {
-                return (
-                  <Link to={"kariyer/" + value.slug} className="ua-card ua-card-index">
-                    <div className="ua-card__img">
-                      <img src={Card1} alt="" />
-                    </div>
-                    <p>{value.name}</p>
-                  </Link>
-                )
-              })}
-                
+              <div
+                className="col-12 col-lg-6 wow fadeIn"
+                data-wow-duration="1s"
+                data-wow-delay="1.5s"
+              >
+                {this.state.roadMaps.map((value, index) => {
+                  return (
+                    <Link
+                      to={"kariyer/" + value.slug}
+                      className="ua-card ua-card-index"
+                    >
+                      <div className="ua-card__img">
+                        <img src={Card1} alt="" />
+                      </div>
+                      <p>{value.name}</p>
+                    </Link>
+                  );
+                })}
+
                 <p className="index__more text-right">
                   <a href="#">
                     <span>Daha Fazla Göster</span>
@@ -115,4 +139,4 @@ class Index extends Component {
     );
   }
 }
-export default Index
+export default Index;

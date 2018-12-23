@@ -8,7 +8,11 @@ export default class Practical extends Component {
   render() {
     return (
       <Fragment>
-        <section className="practical">
+        <section
+          className="practical wow fadeIn"
+          data-wow-duration="1s"
+          data-wow-delay="1s"
+        >
           <div className="container">
             <h6 className="career-header">Yapılan Pratikler</h6>
             <div className="row">

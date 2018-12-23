@@ -10,7 +10,11 @@ export default class LearnEverything extends Component {
   render() {
     return (
       <Fragment>
-        <section className="learn-everything">
+        <section
+          className="learn-everything wow fadeIn"
+          data-wow-duration="1s"
+          data-wow-delay="1.75s"
+        >
           <p className="learn-everything__text text-center">
             Her şeyi öğrenmenin en kolay yolu.
           </p>
