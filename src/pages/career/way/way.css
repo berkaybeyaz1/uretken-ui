@@ -1,3 +1,5 @@
+@import "~slick-carousel/slick/slick.css";	
+@import "~slick-carousel/slick/slick-theme.css";
 .career-header {
   color: #4a4a4a;
   font-size: 18px;
@@ -12,13 +14,32 @@
   box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.07);
   color: #4a4a4a;
   cursor: pointer;
-  display: inline-block;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
   margin-bottom: 30px;
   opacity: 0.7;
   padding: 25px 25px 17px 25px;
   position: relative;
   transition: 0.1s;
-  width: 200px;
+  width: 200px !important;
+  height: 240px !important;
+}
+.way-box-last {
+  background-color: #3f60e8 !important;
+  box-shadow: 0 2px 21px 0 rgba(0, 0, 0, 0.28);
+  color: white !important;
+  opacity: 1 !important;
+}
+.way-box-last .ua-way-box__link {
+  color: white !important;
+}
+/** Slick Slide Config **/	
+.slick-slide {	
+  margin-left: 1px;	
+}	
+.slick-list {	
+  height: 250px !important;	
 }
 
 .way-box:not(:last-of-type) {
@@ -36,6 +57,9 @@
 }
 
 .ua-way-box__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   max-height: 75px;
   text-align: center;
 }
@@ -53,7 +77,6 @@
 
 .ua-way-box__header {
   font-size: 20px;
-  font-weight: bold;
   margin-bottom: 4px;
   margin-top: 20px;
 }
@@ -66,6 +89,7 @@
 
 .ua-way-box__link,
 .ua-way-box__link:hover {
+  align-self: flex-end;
   color: #4a4a4a;
 }
 

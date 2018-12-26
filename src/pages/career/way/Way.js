@@ -6,6 +6,18 @@ import Slider from "react-slick";
 import Card1 from "./../../../img/card-1.png";
 
 export default class Way extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      last_lecture: ""
+    }
+  }
+  componentWillMount() {
+   const getLastLecture = window.localStorage.getItem('last_lecture');
+   this.setState({
+     last_lecture: getLastLecture
+   })
+  }
   render() {
     var settings = {
       dots: true,
@@ -26,21 +38,22 @@ export default class Way extends Component {
             <h6 className="career-header">{this.props.data.name}</h6>
             <Slider {...settings}>
               {this.props.data.lectures.map((value, i) => {
-                console.log(value);
+                console.log(this.state.last_lecture === value.slug, this.state.last_lecture, value.slug)
                 return (
-                  <div className="way-box">
+                  <div className={`way-box ${this.state.last_lecture === value.slug ? 'way-box-last' : ''}`}>
                     <div className="ua-way-box__img">
                       <img src={Card1} alt="" />
                     </div>
                     <h6 className="ua-way-box__header">{value.lecture_name}</h6>
-                    <a
-                      href={`/egitim/${this.props.data.slug}/konu/${
-                        value.slug
-                      }`}
+                    <span
+                      onClick={() => this.props.history.push(`/egitim/${this.props.data.slug}/konu/${value.slug}`, {
+                        totalData: this.props.data.lectures,
+                        currentIndex: i,
+                      })}
                       className="ua-way-box__link"
                     >
                       Detaylı Bilgi
-                    </a>
+                    </span>
                   </div>
                 );
               })}

@@ -17,11 +17,9 @@ class Education extends Component {
     const { ders, konu } = this.props.match.params;
     Services.getLecture(ders, konu).then((response) => {
       this.setState({
-        lecture: response,
-        loading: true
+        loading: true,
+        lecture: response
       })
-    }).catch(err => {
-      console.log(err);
     })
   }
   render() {
@@ -29,7 +27,7 @@ class Education extends Component {
     return (
       <Fragment>
       {this.state.loading ? 
-        <Content lecture={this.state.lecture} />
+        <Content {...this.props} lecture={this.state.lecture} history={this.props.history}/>
       : null}
       </Fragment>
     );

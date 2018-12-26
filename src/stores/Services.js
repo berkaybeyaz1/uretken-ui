@@ -102,6 +102,27 @@ class Store {
             })
         })
     }
+
+    @action getLecturePaginate = (course, lecture) => {
+        return new Promise((resolve,reject) => {
+            fetch(URL + `dashboard/package/${course}/paginate/${lecture}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer '+ String(Account.token),
+                    'content-type': 'application/json; charset=utf-8',
+                },
+            })
+            .then((response) => {
+                resolve(response.json())
+            })
+            .then((responseJSON) => {
+                resolve(responseJSON)
+            })
+            .catch((err) => {
+                reject(err);
+            })
+        })
+    }
 }
 
 export default new Store();

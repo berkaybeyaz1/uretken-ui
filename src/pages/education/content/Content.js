@@ -1,6 +1,14 @@
 import React, { Component, Fragment } from "react";
 import "../content/content.css";
-
+import { withRouter } from "react-router";
+import YouTube from 'react-youtube';
+import Star from "../../../img/star.png";
+import Star1 from "../../../img/star-1.png";
+import Tick from "../../../img/tick.svg";
+import Star0 from "../../../img/star-0.png";
+import Services from "../../../stores/Services";
+import { observer } from "mobx-react";
+const _ = require('lodash')
 const Svg = () => {
   return (
     <svg
@@ -61,27 +69,70 @@ const TextSvg = () => {
     </svg>
   );
 };
-
-export default class Content extends Component {
+@observer
+class Content extends Component {
   constructor(props) {
     super();
+    console.log(props);
     this.state = {
+      completed: false,
       selectedPane: 0,
-      selectedLecture: props.lecture[0]
+      allLecture: props.lecture,
+      selectedLecture: props.lecture[0],
+      totalData: props.location.state.totalData,
+      currentIndex: props.location.state.currentIndex
     };
   }
   changePane = id => {
     this.setState({
       selectedPane: id,
-      selectedLecture: this.props.lecture[id]
+      selectedLecture: this.state.allLecture[id],
+      completed: false,
     });
   };
+
+  componentWillMount() {
+    const { ders, konu } = this.props.match.params;
+    Services.getLecturePaginate(ders, konu).then((response) => {
+      this.setState({
+        nextLectureSlug: response[0].next.length > 0 ? response[0].next[0].slug : "",
+        beforeLectureSlug: response[0].back !== null ?  response[0].back.slug : ""
+      })
+    })
+  }
+
   nextPage = () => {
+    const { ders, konu } = this.props.match.params;
     const getLectureList = this.props.lecture.length - 1;
     const currentPane = this.state.selectedPane;
-    console.log(getLectureList, currentPane);
     if (currentPane > getLectureList || currentPane === getLectureList) {
-      return;
+      if(this.state.completed === true) {
+        this.props.history.replace(`/egitim/${ders}/konu/${this.state.nextLectureSlug}`)
+        Services.getLecturePaginate(ders, konu).then((response) => {
+          this.setState({
+            nextLectureSlug: response[0].next.length > 0 ? response[0].next[0].slug : "",
+            beforeLectureSlug: response[0].back !== null ?  response[0].back.slug : ""
+          })
+        })
+        const index = this.state.currentIndex + 1;
+        console.log(this.state.totalData[index]);
+        window.localStorage.setItem('last_lecture', this.state.totalData[index].slug)
+        Services.getLecture(ders, this.state.totalData[index].slug).then((response) => {
+          this.setState({            
+            selectedLecture: response[0],
+            allLecture: response
+          })
+        })
+        this.setState({
+          selectedPane: 0,
+          completed: false,
+          currentIndex: index,
+        })
+      } else {
+        this.setState({
+          completed: true,
+        })
+      }
     } else {
       this.setState({
         selectedPane: currentPane + 1,
@@ -90,14 +141,14 @@ export default class Content extends Component {
     }
   };
   prevPane = () => {
-    const getLectureList = this.props.lecture.length - 1;
+    const getLectureList = this.state.selectedLecture.length - 1;
     const currentPane = this.state.selectedPane;
     if (currentPane === 0 || currentPane <= 0) {
       return;
     } else {
       this.setState({
         selectedPane: currentPane - 1,
-        selectedLecture: this.props.lecture[currentPane - 1]
+        selectedLecture: this.state.selectedLecture[currentPane - 1]
       });
     }
   };
@@ -125,7 +176,8 @@ export default class Content extends Component {
                         </svg>
                         <span className="education__head__prev-next">Geri</span>
                       </li>
-                      {this.props.lecture.map((value, index) => {
+                      {this.state.completed === false ? 
+                      this.state.allLecture.map((value, index) => {
                         if (value.type === "text") {
                           return (
                             <li
@@ -153,7 +205,12 @@ export default class Content extends Component {
                             </li>
                           );
                         }
-                      })}
+                      }) : (
+                        <div className="education__head__success">
+                          <img src={Tick} alt=""/>
+                          <span>Bölüm Sonu</span>
+                        </div>
+                      )}
                       <li onClick={this.nextPage}>
                         <span className="education__head__prev-next">
                           İleri
@@ -174,26 +231,74 @@ export default class Content extends Component {
                   </div>
                   <div className="education__content">
                     <span className="education__fav">Favorilere ekle</span>
-                    {this.state.selectedLecture.type === "text" ? (
+                    {this.state.completed === true ?
+                      (
+                        <div className="path-finish">
+                          <div className="row">
+                            <div className="col-12 col-md-5">
+                              <h5 className="path-finish__header">TEBRİKLER!</h5>
+                              <img src={Star1} alt="dolu yıldız" className="star" />
+                              <img src={Star0} alt="boş yıldız" className="star" />
+                              <p className="path-finish__desc">
+                                Girişimci olmaya adım adım yaklaştın
+                              </p>
+                              <p className="path-finish__desc">
+                                Tüm pratikleri tam puanla geçemediğin için tek
+                                yıldıza sahip olabildin.
+                              </p>
+                              <h6 className="path-finish__sub-header">
+                                Kazanılan XP
+                              </h6>
+                              <p className="path-finish__sub-desc">400/1000XP</p>
+                              <h6 className="path-finish__sub-header">
+                                Kazanılan Tecrübeler
+                              </h6>
+                              <p className="path-finish__sub-desc">
+                                Girişimcilik Tecrübesi 50+1
+                              </p>
+                              <div className="progress">
+                                <div
+                                  className="progress-bar"
+                                  role="progressbar"
+                                  style={{ width: `${100/(this.state.totalData.length/this.state.currentIndex+1)}%` }}
+                                  aria-valuenow={100/(this.state.totalData.length/this.state.currentIndex+1)}
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                />
+                              </div>
+                            </div>
+                          <div className="col-12">
+                            <div className="path-finish__buttons">
+                              <a href="#" onClick={() => this.changePane(0)} className="btn btn--small btn--ghost">
+                                Eğitimi Tekrarla
+                              </a>
+                              <a href="#" onClick={this.nextPage} className="btn btn--small">
+                                Devam Et
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                      )
+                    : null}
+                    {this.state.selectedLecture.type === "text" && this.state.completed === false ? (
                       <div
                         dangerouslySetInnerHTML={{
                           __html: this.state.selectedLecture.data
                         }}
                       />
-                    ) : (
-                      <div class="youtube-embed">
-                        <iframe
-                          allowFullScreen="allowFullScreen"
-                          src={`https://www.youtube.com/embed/${
-                            this.state.selectedLecture.data
-                          }?ecver=1&amp;iv_load_policy=1&amp;yt:stretch=16:9&amp;autohide=1&amp;color=red&amp;width=560&amp;width=560`}
-                          width="560"
-                          height="315"
-                          allowtransparency="true"
-                          frameborder="0"
-                        />
-                      </div>
-                    )}
+                    ) : null}
+                    {this.state.selectedLecture.type === "video" && this.state.completed === false ? (
+                      <YouTube
+                        opts={{
+                          autoplay: 1,
+                          controls: 0,
+                          width: '100%',
+                          height: '500px',
+                        }}
+                        videoId={this.state.selectedLecture.data}
+                      />
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -204,3 +309,4 @@ export default class Content extends Component {
     );
   }
 }
+export default withRouter(Content)

@@ -34,20 +34,27 @@ window.store = stores;
 
 const history = syncHistoryWithStore(browserHistory, routingStore);
 
+
+const HomePageContainer = () => {
+  if((Account.authorized === true && String(Account.token).length > 3) || JSON.parse(window.localStorage.getItem("Account")).authorized) {
+    return <Redirect to="/kariyer/derin-ogrenme" />
+  } else {
+    return <HomePage />
+  }
+}
+
+
+
 @observer
 class App extends Component {
   renderLogout = () => {
-    if (
-      (Account.authorized === true && String(Account.token).length > 3) ||
-      JSON.parse(window.localStorage.getItem("Account")).authorized
-    ) {
-      Account.logout().then(() => {
-        this.props.history.push("/giris-yap");
+    if (JSON.parse(window.localStorage.getItem("Account")).authorized){
+      Account.logout().then((response) => {
+        return <Redirect to="/giris-yap" />
       });
     } else {
-      this.props.history.push("/");
+     return <Redirect to="/" />
     }
-    return <div />;
   };
   componentDidMount() {
     new WOW().init();
@@ -58,8 +65,7 @@ class App extends Component {
         <Route
           {...rest}
           render={props =>
-            (Account.authorized === true && String(Account.token).length > 3) ||
-            JSON.parse(window.localStorage.getItem("Account")).authorized ? (
+            JSON.parse(window.localStorage.getItem("Account")).authorized === true? (
               <Component {...props} />
             ) : (
               <Redirect to="/giris-yap" />
@@ -70,7 +76,7 @@ class App extends Component {
     };
     return (
       <Provider {...stores}>
-        <BrowserRouter history={history}>
+        <Router history={history} basename="/">
           <Fragment>
             <Header />
             <Simplert
@@ -81,7 +87,7 @@ class App extends Component {
             />
             <main>
               <ScrollTop>
-                <Route path="/" component={HomePage} exact />
+                <Route path="/" component={HomePageContainer} exact />
                 <PrivateRoute path="/kariyer-sec" component={RoadMapList} />
                 <PrivateRoute path="/kariyer/:kariyer" component={Career} />
                 <PrivateRoute
@@ -89,12 +95,15 @@ class App extends Component {
                   component={Education}
                 />
                 <Route path="/giris-yap" component={Login} />
-                <Route path="/cikis-yap" component={this.renderLogout} />
+                <Route path="/cikis-yap" render={() =>
+                              JSON.parse(window.localStorage.getItem("Account")).authorized === true ? (
+                                this.renderLogout()
+                              ) : <Redirect to="/giris-yap"/>} />
               </ScrollTop>
             </main>
             <Footer />
           </Fragment>
-        </BrowserRouter>
+        </Router>
       </Provider>
     );
   }

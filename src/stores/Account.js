@@ -4,9 +4,9 @@ import { persist } from 'mobx-persist';
 
 const URL = "http://uretkenakdemi-env.msutivn332.eu-central-1.elasticbeanstalk.com/api/";
 class Store {
-  @persist @observable authorized;
-  @persist('object') @observable user;
-  @persist @observable token = JSON.parse(window.localStorage.getItem('Account')).token;
+  @observable authorized;
+  @observable user;
+  @observable token = JSON.parse(window.localStorage.getItem('Account')).token;
 
   @action login = (email, password) => {
     return new Promise((resolve, reject) => {
@@ -50,10 +50,11 @@ class Store {
 
   @action logout = () => {
     return new Promise((resolve, reject) => {
+      window.localStorage.removeItem('Account')
       this.authorized = false;
       this.token = "";
       this.user = ""
-      resolve();
+      resolve(true);
     });
   }
 }
