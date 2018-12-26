@@ -59,6 +59,8 @@ class Login extends Component {
           Store.Services.alertHide();
           this.props.history.push("/kariyer-sec");
         }, 1000);
+        window.localStorage.removeItem('Account');
+        window.localStorage.setItem('Account', JSON.stringify({token: response.data.token, authorized: true, user: ''}))
         Store.Account.setUser(response.data.token);
         Store.Account.authorized = true;
       } else {
@@ -107,7 +109,8 @@ class Login extends Component {
               Store.Services.alertHide();
               this.props.history.push("/kariyer-sec");
             }, 1000);
-            console.log(response);
+            window.localStorage.removeItem('Account');
+            window.localStorage.setItem('Account', JSON.stringify({token: response.data.token, authorized: true, user: ''}))
             Store.Account.setUser(response.data.token);
             Store.Account.authorized = true;
           }

@@ -40,7 +40,10 @@ export default class Way extends Component {
               {this.props.data.lectures.map((value, i) => {
                 console.log(this.state.last_lecture === value.slug, this.state.last_lecture, value.slug)
                 return (
-                  <div className={`way-box ${this.state.last_lecture === value.slug ? 'way-box-last' : ''}`}>
+                  <div className={`way-box ${this.state.last_lecture === value.slug ? 'way-box-last' : ''}`} onClick={() => this.props.history.push(`/egitim/${this.props.data.slug}/konu/${value.slug}`, {
+                        totalData: this.props.data.lectures,
+                        currentIndex: i,
+                      })}>
                     <div className="ua-way-box__img">
                       <img src={Card1} alt="" />
                     </div>

@@ -43,7 +43,7 @@ const HomePageContainer = () => {
   }
 }
 
-
+window.localStorage.setItem('Account', JSON.stringify({token: '', authorized: false, user: ''}));
 
 @observer
 class App extends Component {
